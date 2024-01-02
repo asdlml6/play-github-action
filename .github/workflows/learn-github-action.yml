@@ -2,21 +2,33 @@ name: learn-github-action
 on: [push]
 jobs:
   checkout-bats-version1:
-    name: ''
+    name: checkout-bats-version1-name
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v3
         with: 
-        node-version: '14'
+          node-version: '14'
       - run: npm install -g bats
       - run: bats -v
   checkout-bats-version2:
-   runs-on: ubuntu-latest
-   steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v3
-      with: 
-       node-version: '14'
-    - run: npm install -g bats
-    - run: bats -v
+    name: checkout-bats-version2-name
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v3
+        with: 
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v
+  checkout-bats-version3:
+    needs: [checkout-bats-version2]
+    name: checkout-bats-version3-name
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v3
+        with: 
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v
